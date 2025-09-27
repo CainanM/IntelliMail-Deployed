@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processador - IntelliMail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processando e-mails... Isso pode levar alguns segundos.</p>
+    </div>
+
+    <div class="app-layout">
+        <nav class="sidebar">
+            <img src="assets/logo.png" alt="IntelliMail Logo" class="sidebar-logo">
+            <div class="sidebar-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="personalizacao.html">Personalização</a>
+                <a href="processador.html" class="active">Processador de E-mails</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header>
+                <h1>Processador de E-mails</h1>
+            </header>
+
+            <div class="processor-container">
+                <form id="email-form">
+                    <div class="input-group" style="margin-bottom: 30px;">
+                        <label>Modo de Resposta</label>
+                        <div class="toggle-switch">
+                            <input type="radio" id="mode-personal" name="response-mode" value="Pessoal" checked>
+                            <label for="mode-personal">Pessoal</label>
+                            <input type="radio" id="mode-business" name="response-mode" value="Empresarial">
+                            <label for="mode-business">Empresarial</label>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-panels">
+                        <div class="text-panel">
+                            <div class="input-group">
+                                <label for="email-text">Cole o texto do e-mail aqui:</label>
+                                <textarea id="email-text" rows="12" placeholder="Ex: Olá, gostaria de saber o status do meu pedido..."></textarea>
+                            </div>
+                        </div>
+                        <div class="upload-panel">
+                            <div class="input-group">
+                                <label for="email-file">Ou faça o upload de um arquivo:</label>
+                                <div class="drop-zone">
+                                    <input type="file" id="email-file" accept=".txt,.pdf,.zip" class="drop-zone-input">
+                                    <p>Arraste e solte o arquivo aqui, ou clique para selecionar.</p>
+                                    <p class="file-info-text">Aceita .txt, .pdf ou .zip</p>
+                                    <p class="file-name-display"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <button type="button" id="submit-btn" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Processar E-mail</button>
+                
+                <div id="error-container" class="feedback-container feedback-error hidden" style="margin-top: 20px;">
+                    <h3 id="error-title">Erro!</h3>
+                    <p id="error-message"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header">
+                <h2 style="color: #1c1e21;">✅ Sucesso!</h2>
+                <button id="success-modal-close-btn" class="modal-close-btn">&times;</button>
+            </div>
+            <p>Seu e-mail foi processado e salvo.</p>
+            <a href="dashboard.html" class="btn btn-primary" style="margin-top: 10px;">Ver no Dashboard</a>
+        </div>
+    </div>
+
+    <script src="processador.js"></script>
+</body>
+</html>

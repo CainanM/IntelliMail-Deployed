@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IntelliMail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar">
+            <img src="assets/logo.png" alt="IntelliMail Logo" class="sidebar-logo">
+            <div class="sidebar-nav">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="personalizacao.html">Personalização</a>
+                <a href="processador.html">Processador de E-mails</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header>
+                 <h1>Dashboard</h1>
+                 <div class="header-actions">
+                    <div class="sort-control">
+                        <label for="sort-by">Ordenar por:</label>
+                        <select id="sort-by" class="input-style">
+                            <option value="date_desc">Mais Recentes</option>
+                            <option value="category_asc">Improdutivos</option>
+                            <option value="category_desc">Produtivos</option>
+                        </select>
+                    </div>
+                    <button id="clear-history-btn" class="btn btn-secondary">Limpar Histórico</button>
+                    <a href="processador.html" class="btn btn-primary">Novo E-mail</a>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card"><h3>E-mails Processados</h3><p id="total-emails">0</p></div>
+                <div class="stat-card"><h3>E-mails Produtivos</h3><p id="produtivos-count">0</p></div>
+                <div class="stat-card"><h3>E-mails Improdutivos</h3><p id="improdutivos-count">0</p></div>
+                <div class="stat-card"><h3>Taxa de Produtividade</h3><p id="taxa-produtividade">0%</p></div>
+            </div>
+
+            <div class="recent-emails">
+                <h2>E-mails Recentes</h2>
+                <table class="email-table">
+                    <thead>
+                        <tr>
+                            <th>Assunto</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ações</th> </tr>
+                    </thead>
+                    <tbody id="recent-emails-table-body">
+                        </tbody>
+                </table>
+                <div id="pagination-controls" class="pagination-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="details-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-subject">Detalhes do E-mail</h2>
+                <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <div class="result-item">
+                    <h3>Categoria</h3>
+                    <p id="modal-category"></p>
+                </div>
+                <div class="result-item">
+                    <h3>Sugestão de Resposta</h3>
+                    <p id="modal-suggestion" style="white-space: pre-wrap;"></p>
+                </div>
+                <div class="result-item">
+                    <h3>Conteúdo Original</h3>
+                    <p id="modal-content" style="white-space: pre-wrap; max-height: 200px; overflow-y: auto; background-color: #f8f9fa;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

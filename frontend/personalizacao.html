@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalização - IntelliMail</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar">
+            <img src="assets/logo.png" alt="IntelliMail Logo" class="sidebar-logo">
+            <div class="sidebar-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="personalizacao.html" class="active">Personalização</a>
+                <a href="processador.html">Processador de E-mails</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header>
+                <h1>Personalização</h1>
+            </header>
+
+            <div class="settings-container">
+                <form id="personalization-form">
+                    <h2>Suas Informações</h2>
+                    <p>Preencha os campos abaixo para que a IA gere respostas mais personalizadas.</p>
+
+                    <div class="input-group">
+                        <label for="user-name">Seu Nome</label>
+                        <input type="text" id="user-name" placeholder="Ex: João">
+                    </div>
+                    <div class="input-group">
+                        <label for="user-lastname">Seu Sobrenome</label>
+                        <input type="text" id="user-lastname" placeholder="Ex: Silva">
+                    </div>
+                    <div class="input-group">
+                        <label for="company-name">Nome da Empresa (Opcional)</label>
+                        <input type="text" id="company-name" placeholder="Ex: InovaTech Soluções">
+                    </div>
+
+                    <hr class="divider">
+
+                    <h2>Refinamento do Prompt da IA</h2>
+                    <p>Adicione instruções personalizadas para guiar as respostas da IA. Você pode usar <strong>{full_name}</strong> e <strong>{company_name}</strong> para inserir suas informações dinamicamente.</p>
+                    <div class="input-group">
+                        <label for="custom-prompt">Instruções para a IA</label>
+                        <textarea id="custom-prompt" rows="5" placeholder="Ex: Sempre finalize a sugestão com 'Atenciosamente, {full_name}'."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
+                
+                <div id="feedback-message" class="feedback-success hidden" style="margin-top: 20px;">
+                    <p>Informações salvas com sucesso!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="personalizacao.js"></script>
+</body>
+</html>
