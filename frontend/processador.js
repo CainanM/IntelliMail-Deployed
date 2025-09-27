@@ -1,7 +1,7 @@
 // IntelliMail/frontend/processador.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const API_BASE_URL = 'https://intellimail-i2jx.onrender.com'; 
+    const API_BASE_URL = 'http://127.0.0.1:8000'; // Lembre-se de atualizar para a URL do Render quando fizer o deploy
 
     const form = document.getElementById('email-form');
     const emailTextInput = document.getElementById('email-text');
@@ -11,16 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessageP = document.getElementById('error-message');
     const successModal = document.getElementById('success-modal');
     const successModalCloseBtn = document.getElementById('success-modal-close-btn');
-    const dropZone = document.querySelector('.drop-zone');
     const fileNameDisplay = document.querySelector('.file-name-display');
     const loadingOverlay = document.getElementById('loading-overlay');
 
-    if (dropZone) {
-        dropZone.addEventListener('click', () => emailFileInput.click());
+    // --- MUDANÇA PRINCIPAL AQUI ---
+    // Removemos o listener de 'click' da dropZone.
+    // O listener de 'change' é o único necessário.
+    if (emailFileInput) {
         emailFileInput.addEventListener('change', () => {
-            if (emailFileInput.files.length > 0) {
+            if (emailFileInput.files && emailFileInput.files.length > 0) {
                 fileNameDisplay.textContent = emailFileInput.files[0].name;
                 emailTextInput.value = '';
+            } else {
+                fileNameDisplay.textContent = '';
             }
         });
     }
@@ -74,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(data.error || 'Ocorreu um erro desconhecido.');
             }
-
+            
             let currentHistory = JSON.parse(sessionStorage.getItem('processedEmails')) || [];
             
             data.processed_emails.forEach(email => {
-                email.id = Date.now() + Math.random(); 
-                currentHistory.unshift(email); 
+                email.id = Date.now() + Math.random();
+                currentHistory.unshift(email);
             });
 
             sessionStorage.setItem('processedEmails', JSON.stringify(currentHistory));
