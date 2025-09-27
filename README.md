@@ -1,6 +1,7 @@
 # IntelliMail: Seu Assistente Inteligente de E-mails
 
 ![Logo](frontend/assets/logo.png)
+https://intellimail-frontend.onrender.com
 
 O IntelliMail é uma aplicação web projetada para transformar a maneira como você gerencia sua caixa de entrada, utilizando o poder da Inteligência Artificial para otimizar sua produtividade.
 
