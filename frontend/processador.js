@@ -1,7 +1,7 @@
 // IntelliMail/frontend/processador.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const API_BASE_URL = 'http://127.0.0.1:8000'; // Lembre-se de atualizar para a URL do Render quando fizer o deploy
+    const API_BASE_URL = 'https://intellimail-i2jx.onrender.com'; 
 
     const form = document.getElementById('email-form');
     const emailTextInput = document.getElementById('email-text');

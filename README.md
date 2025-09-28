@@ -1,9 +1,20 @@
 # IntelliMail: Seu Assistente Inteligente de E-mails
 
 ![Logo](frontend/assets/logo.png)
-https://intellimail-frontend.onrender.com
 
-O IntelliMail é uma aplicação web projetada para transformar a maneira como você gerencia sua caixa de entrada, utilizando o poder da Inteligência Artificial para otimizar sua produtividade.
+## 🚀 Como Usar a Versão Online
+
+A aplicação está hospedada no plano gratuito do Render, o que significa que o backend (a API) pode levar um tempo para "acordar" após um período de inatividade. Para garantir que tudo funcione corretamente, siga estes passos:
+
+1.  **Inicialize o Backend**: Primeiro, abra o link da API em uma nova aba e aguarde. Você verá uma mensagem simples, como um "Not Found" ou um erro, mas o importante é que esta ação irá iniciar o servidor.
+    * **URL do Backend**: [https://intellimail-i2jx.onrender.com](https://intellimail-i2jx.onrender.com)
+
+2.  **Acesse a Aplicação**: Após o backend ter inicializado (geralmente em menos de um minuto), abra o link do frontend para começar a usar o IntelliMail.
+    * **URL do Frontend**: [https://intellimail-frontend.onrender.com/dashboard.html](https://intellimail-frontend.onrender.com/dashboard.html)
+
+Se você acessar o frontend e as requisições não funcionarem, apenas aguarde um minuto e tente novamente.
+
+---
 
 ## O Que o IntelliMail Faz?
 
