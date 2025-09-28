@@ -9,5 +9,5 @@ __pycache__/
 # Arquivo de variáveis de ambiente
 .env
 
-# Banco de dados SQLite
+# Banco de dados local para testes
 *.db
