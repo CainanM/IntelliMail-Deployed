@@ -84,7 +84,7 @@ def analyze_content_with_ia(content, personalization_instruction, custom_prompt)
                         2. Baseado na "Instrução Adicional do Usuário" e nas "Definições das Categorias", este e-mail exige uma ação prioritária?
                         3. Portanto, qual é a categoria correta?
                         4. Qual é a resposta ou ação mais eficiente?
-                        5. Busque sempre adicionar um cumprimento + a "Instrução de Personalização" ao final do e-mail. Ex: "Atenciosamente, Cainan Martins"
+                        5. Busque sempre adicionar um cumprimento + a "Instrução de Personalização" ao final do e-mail. Ex: "Atenciosamente, [Instrução de Personalização]"
 
                 # Formato da Saída
                     Retorne APENAS um objeto JSON válido, com as chaves 'subject', 'category' e 'suggestion'. Não inclua nenhum texto ou explicação fora do objeto JSON.
@@ -121,9 +121,9 @@ def process_email():
     
     personalization_instruction = ""
     if mode == "Empresarial" and company_name:
-        personalization_instruction = f"A sugestão de resposta deve ser em tom profissional, representando a empresa '{company_name}'."
+        personalization_instruction = f"A sugestão de resposta deve ser em tom profissional, claro e representando a empresa '{company_name}'."
     elif mode == "Pessoal" and user_name:
-        personalization_instruction = f"A sugestão de resposta deve ser em primeira pessoa, como se fosse escrita por '{full_name}'."
+        personalization_instruction = f"A sugestão de resposta deve ser em primeira pessoa, não precisa ser tão formal, e deve ser como se fosse escrita por '{full_name}'."
 
     emails_to_process = []
     
