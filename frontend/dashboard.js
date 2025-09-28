@@ -6,22 +6,10 @@ const modalSubject = document.getElementById('modal-subject');
 const modalCategory = document.getElementById('modal-category');
 const modalSuggestion = document.getElementById('modal-suggestion');
 const modalContent = document.getElementById('modal-content');
+const sortBySelect = document.getElementById('sort-by');
+const tableBody = document.getElementById('recent-emails-table-body');
 
-
-function renderDashboardFromSession() {
-    const emails = JSON.parse(sessionStorage.getItem('processedEmails')) || [];
-
-    const totalEmails = emails.length;
-    const produtivosCount = emails.filter(e => e.category === 'Produtivo').length;
-    const improdutivosCount = emails.filter(e => e.category === 'Improdutivo').length;
-    const taxaProdutividade = totalEmails > 0 ? Math.round((produtivosCount / totalEmails) * 100) : 0;
-
-    document.getElementById('total-emails').textContent = totalEmails;
-    document.getElementById('produtivos-count').textContent = produtivosCount;
-    document.getElementById('improdutivos-count').textContent = improdutivosCount;
-    document.getElementById('taxa-produtividade').textContent = `${taxaProdutividade}%`;
-
-    const tableBody = document.getElementById('recent-emails-table-body');
+function renderTable(emails) {
     tableBody.innerHTML = ''; 
 
     if (emails.length === 0) {
@@ -45,6 +33,39 @@ function renderDashboardFromSession() {
     });
 }
 
+
+function updateStats(emails) {
+    const totalEmails = emails.length;
+    const produtivosCount = emails.filter(e => e.category === 'Produtivo').length;
+    const improdutivosCount = emails.filter(e => e.category === 'Improdutivo').length;
+    const taxaProdutividade = totalEmails > 0 ? Math.round((produtivosCount / totalEmails) * 100) : 0;
+
+    document.getElementById('total-emails').textContent = totalEmails;
+    document.getElementById('produtivos-count').textContent = produtivosCount;
+    document.getElementById('improdutivos-count').textContent = improdutivosCount;
+    document.getElementById('taxa-produtividade').textContent = `${taxaProdutividade}%`;
+}
+
+
+function sortAndRender() {
+    const emails = JSON.parse(sessionStorage.getItem('processedEmails')) || [];
+    const sortBy = sortBySelect.value;
+
+    const sortedEmails = [...emails].sort((a, b) => {
+        switch (sortBy) {
+            case 'category_asc':
+                return a.category.localeCompare(b.category); 
+            case 'category_desc':
+                return b.category.localeCompare(a.category); 
+            default:
+                return 0; 
+        }
+    });
+
+    renderTable(sortedEmails);
+}
+
+
 function showEmailDetails(emailId) {
     const emails = JSON.parse(sessionStorage.getItem('processedEmails')) || [];
     const email = emails.find(e => String(e.id) === String(emailId));
@@ -60,19 +81,20 @@ function showEmailDetails(emailId) {
     }
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
-    renderDashboardFromSession();
-
-
-    document.getElementById('sort-by').disabled = true;
-
-    document.getElementById('recent-emails-table-body').addEventListener('click', (event) => {
+    const initialEmails = JSON.parse(sessionStorage.getItem('processedEmails')) || [];
+    updateStats(initialEmails);
+    sortAndRender(); 
+    tableBody.addEventListener('click', (event) => {
         const target = event.target.closest('.view-btn');
         if (target) {
             const emailId = target.getAttribute('data-email-id');
             showEmailDetails(emailId);
         }
     });
+
+    sortBySelect.addEventListener('change', sortAndRender);
 
     modalCloseBtn.addEventListener('click', () => modal.classList.remove('visible'));
     modal.addEventListener('click', (event) => {
@@ -82,7 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('clear-history-btn').addEventListener('click', () => {
         if (confirm('Você tem certeza que deseja apagar o histórico desta sessão?')) {
             sessionStorage.removeItem('processedEmails');
-            renderDashboardFromSession();
+            const emptyEmails = [];
+            updateStats(emptyEmails);
+            renderTable(emptyEmails);
             alert('Histórico da sessão limpo com sucesso.');
         }
     });
